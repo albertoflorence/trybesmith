@@ -6,6 +6,7 @@ import ProductModel from '../database/models/product.model';
 async function getAll(): Service.Return {
   const orders = await OrderModel.findAll({
     include: { model: ProductModel, as: 'productIds', attributes: [] },
+    raw: true,
     attributes: [
       'id',
       'userId',
