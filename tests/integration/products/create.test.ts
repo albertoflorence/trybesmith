@@ -12,8 +12,17 @@ describe('POST /products', function () {
     sinon.restore();
   });
 
+  it('should return 400 when name is not provided', async function () {
+    const response = await chai.request(app).post('/products').send();
+
+    expect(response).to.have.status(400);
+    expect(response.body).to.deep.equal({
+      message: '"name" is required',
+    });
+  });
+
   it('should return 201 when product is created', async function () {
-    const data = { name: 'Product 1', price: '10', orderId: 4 };
+    const data = { name: 'Product 1', price: 'R$ 100.00', orderId: 4 };
     const product = ProductModel.build(data);
     sinon.stub(ProductModel, 'create').resolves(product);
     const response = await chai.request(app).post('/products').send(data);
