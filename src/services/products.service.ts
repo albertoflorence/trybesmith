@@ -8,4 +8,9 @@ async function create(product: Optional<Product, 'id'>): Service.Return {
   return { code: 'CREATED', data: dataValues };
 }
 
-export default { create };
+async function getAll(): Service.Return {
+  const products = await ProductModel.findAll();
+  return { code: 'OK', data: products };
+}
+
+export default { create, getAll };

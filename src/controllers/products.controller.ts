@@ -8,4 +8,9 @@ async function create(req: Request, res: Response) {
   handleResponse(res, result);
 }
 
-export default { create };
+async function getAll(req: Request, res: Response) {
+  const result = await productsService.getAll();
+  handleResponse(res, result);
+}
+
+export default { create, getAll };
