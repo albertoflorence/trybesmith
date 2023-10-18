@@ -7,4 +7,10 @@ async function getAll(req: Request, res: Response) {
   handleResponse(res, result);
 }
 
-export default { getAll };
+async function create(req: Request, res: Response) {
+  const { userId, productIds } = req.body;
+  const result = await ordersService.create({ userId, productIds });
+  handleResponse(res, result);
+}
+
+export default { getAll, create };

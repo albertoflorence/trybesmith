@@ -12,9 +12,13 @@ function generate(payload: Payload): string {
   return token;
 }
 
-function verify(token: string): Payload {
-  const payload = jwt.verify(token, SECRET) as Payload;
-  return payload;
+function verify(token: string): Payload | null {
+  try {
+    const payload = jwt.verify(token, SECRET) as Payload;
+    return payload;
+  } catch {
+    return null;
+  }
 }
 
 export default { generate, verify };
